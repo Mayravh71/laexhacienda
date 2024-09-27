@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - Restaurante La Ex Hacienda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #e76114; /* Color modificado */
+            color: white;
+        }
+        .menu-images {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .menu-images img {
+            max-width: 80%;
+            margin: 10px 0;
+        }
+        .gallery {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .gallery-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        .gallery img {
+            width: 100vw; /* Ocupa toda la pantalla */
+            max-height: 90vh; /* Altura máxima */
+            object-fit: cover; /* Mantiene la relación de aspecto */
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10; /* Asegura que las flechas estén por encima de las imágenes */
+        }
+        .arrow.left {
+            left: 10px;
+        }
+        .arrow.right {
+            right: 10px;
+        }
+        .social-icons {
+            margin: 10px 0;
+        }
+        .social-icons img {
+            display: block;
+            margin: 0 auto; /* Centra el logo de Facebook */
+            width: 40px; /* Ajusta el tamaño del logo */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Menú del Restaurante La Ex Hacienda</h1>
+</header>
+
+<div class="menu-images">
+    <img src="menu1.jpeg" alt="Menú 1">
+    <img src="menu2.jpeg" alt="Menú 2">
+</div>
+
+<div class="gallery">
+    <div class="arrow left" onclick="scrollGallery(-1)" id="left-arrow">&#9664;</div>
+    <div class="gallery-inner">
+        <img src="comida1.jpeg" alt="Comida 1">
+        <img src="comida2.jpeg" alt="Comida 2">
+        <img src="comida3.jpeg" alt="Comida 3">
+        <img src="comida5.jpeg" alt="Comida 5">
+        <img src="comida6.jpeg" alt="Comida 6">
+        <img src="comida7.jpeg" alt="Comida 7">
+        <img src="comida8.jpeg" alt="Comida 8">
+        <img src="comida9.jpeg" alt="Comida 9">
+        <img src="comida10.jpeg" alt="Comida 10">
+        <img src="comida11.jpeg" alt="Comida 11">
+        <img src="comida13.jpeg" alt="Comida 13">
+    </div>
+    <div class="arrow right" onclick="scrollGallery(1)" id="right-arrow">&#9654;</div>
+</div>
+
+<div class="social-icons">
+    <a href="https://www.facebook.com/TU_PAGINA_DE_FACEBOOK" target="_blank">
+        <img src="facebook-logo.jpeg" alt="Facebook">
+    </a>
+</div>
+
+<footer>
+    <p>Restaurante La Ex Hacienda</p>
+    <p>Contacto: 2441003374</p>
+    <p>Dirección: Calle 20 Poniente 3108, Colonia Cabreara, Atlixco, Puebla</p>
+</footer>
+
+<script>
+    let currentIndex = 0;
+
+    function scrollGallery(direction) {
+        const images = document.querySelectorAll('.gallery-inner img');
+        const totalImages = images.length;
+
+        // Actualiza el índice actual
+        currentIndex += direction;
+
+        // Asegúrate de que el índice se mantenga dentro del rango
+        if (currentIndex < 0) {
+            currentIndex = 0; // No permitir ir más atrás
+        } else if (currentIndex >= totalImages) {
+            currentIndex = totalImages - 1; // No permitir ir más allá
+        }
+
+        // Mueve la galería
+        const galleryInner = document.querySelector('.gallery-inner');
+        const offset = -currentIndex * 100; // 100vw por imagen
+        galleryInner.style.transform = `translateX(${offset}vw)`;
+
+        // Habilitar o deshabilitar flechas
+        document.getElementById('left-arrow').style.display = currentIndex === 0 ? 'none' : 'block';
+        document.getElementById('right-arrow').style.display = currentIndex === totalImages - 1 ? 'none' : 'block';
+    }
+
+    // Inicializar estado de flechas al cargar
+    scrollGallery(0);
+</script>
+
+</body>
+</html>
